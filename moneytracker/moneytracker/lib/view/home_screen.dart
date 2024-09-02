@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: 
         FloatingActionButton(
+          backgroundColor: Colors.teal,
           onPressed: () {
             // mostrar un bottom sheet para agregar una nueva transacción
             showModalBottomSheet(
@@ -30,7 +31,10 @@ class HomeScreen extends StatelessWidget {
                 return const AddTransactionDialog();
               });
           },
-          child: const Icon(Icons.add),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            ),
         ),
     );
   }

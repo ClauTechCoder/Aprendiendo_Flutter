@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moneytracker/controller/transaction_provider.dart';
 import 'package:moneytracker/view/widgets/header_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -9,11 +11,16 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final provider = Provider.of<TransactionProvider>(context);
+    final balance = provider.getBalance();
+    final incomes = provider.getTotalIncomes();
+    final expenses = provider.getTotalExpenses();
 
     return SizedBox(
       width: double.infinity, // tomar espacio disponible en la fila
       child: Column(
         children: [
+          const SizedBox(height: 12),
           Text(
             'MONEY TRACKER',
             style: textTheme.titleSmall!.copyWith(
@@ -28,25 +35,25 @@ class HomeHeader extends StatelessWidget {
               color: Colors.white.withOpacity(0.5)),
           ),
           Text(
-            '\$1,000.00',
+            '\$ ${balance.toStringAsFixed(2)}',
             style: textTheme.headlineLarge!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white),
           ), 
-          const Padding(
-            padding: EdgeInsets.all(20.0),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Row(
               children: [
                 HeaderCard(
-                  title: 'Income',
-                  amount: 1000,
-                  icon: Icon(Icons.attach_money, color: Colors.teal),
+                  title: 'Incomes',
+                  amount: incomes,
+                  icon: const Icon(Icons.attach_money, color: Colors.teal),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 HeaderCard(
-                  title: 'Expense',
-                  amount: -500,
-                  icon: Icon(Icons.money_off, color: Colors.red),
+                  title: 'Expenses',
+                  amount: expenses,
+                  icon: const Icon(Icons.money_off, color: Colors.red),
                 )
               ],
             ),

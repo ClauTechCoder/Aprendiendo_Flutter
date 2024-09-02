@@ -16,6 +16,9 @@ class HeaderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final formattedamount = amount < 0 ? 
+    '-\$ ${amount.abs().toStringAsFixed(2)}' : '\$ ${amount.toStringAsFixed(2)}';
+
     return Expanded(
       child: Card(
         margin: const EdgeInsets.all(0), // equivalente a EdgeInsets.zero
@@ -33,8 +36,8 @@ class HeaderCard extends StatelessWidget {
                   const SizedBox(width: 12),
                 ],
               ),
-              SizedBox(height: 8),
-              Text('\$ $amount', style: textTheme.titleLarge),
+              const SizedBox(height: 8),
+              Text(formattedamount, style: textTheme.titleLarge),
             ],
           ),
         ),
